@@ -19,10 +19,10 @@ Part1_Interrupt_bumsw_motor.obj: C:/TI/ccs/ccs_base/arm/include/CMSIS/core_cm4.h
 Part1_Interrupt_bumsw_motor.obj: C:/TI/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h
 Part1_Interrupt_bumsw_motor.obj: C:/TI/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h
 Part1_Interrupt_bumsw_motor.obj: C:/TI/ccs/ccs_base/arm/include/system_msp432p401r.h
-Part1_Interrupt_bumsw_motor.obj: C://Users/fx19583/workspace_v10/part1_group13/inc/Clock.h
-Part1_Interrupt_bumsw_motor.obj: C://Users/fx19583/workspace_v10/part1_group13/inc/SysTick.h
-Part1_Interrupt_bumsw_motor.obj: C://Users/fx19583/workspace_v10/part1_group13/inc/CortexM.h
-Part1_Interrupt_bumsw_motor.obj: C://Users/fx19583/workspace_v10/part1_group13/inc/motor.h
+Part1_Interrupt_bumsw_motor.obj: C://Users/fx19583/robot/part1_group13/inc/Clock.h
+Part1_Interrupt_bumsw_motor.obj: C://Users/fx19583/robot/part1_group13/inc/SysTick.h
+Part1_Interrupt_bumsw_motor.obj: C://Users/fx19583/robot/part1_group13/inc/CortexM.h
+Part1_Interrupt_bumsw_motor.obj: C://Users/fx19583/robot/part1_group13/inc/motor.h
 
 ../Part1_Interrupt_bumsw_motor.c:
 
@@ -62,11 +62,11 @@ C:/TI/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h:
 
 C:/TI/ccs/ccs_base/arm/include/system_msp432p401r.h:
 
-C://Users/fx19583/workspace_v10/part1_group13/inc/Clock.h:
+C://Users/fx19583/robot/part1_group13/inc/Clock.h:
 
-C://Users/fx19583/workspace_v10/part1_group13/inc/SysTick.h:
+C://Users/fx19583/robot/part1_group13/inc/SysTick.h:
 
-C://Users/fx19583/workspace_v10/part1_group13/inc/CortexM.h:
+C://Users/fx19583/robot/part1_group13/inc/CortexM.h:
 
-C://Users/fx19583/workspace_v10/part1_group13/inc/motor.h:
+C://Users/fx19583/robot/part1_group13/inc/motor.h:
 

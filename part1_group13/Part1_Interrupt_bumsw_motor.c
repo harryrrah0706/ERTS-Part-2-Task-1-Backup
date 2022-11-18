@@ -34,10 +34,10 @@ policies, either expressed or implied, of the FreeBSD Project.
 
 // Check these if you really need to include these libraries in your code
 
-#include "C://Users/fx19583/workspace_v10/part1_group13/inc/Clock.h"
-#include "C://Users/fx19583/workspace_v10/part1_group13/inc/SysTick.h"
-#include "C://Users/fx19583/workspace_v10/part1_group13/inc/CortexM.h"
-#include "C://Users/fx19583/workspace_v10/part1_group13/inc/motor.h"
+#include "C://Users/fx19583/robot/part1_group13/inc/Clock.h"
+#include "C://Users/fx19583/robot/part1_group13/inc/SysTick.h"
+#include "C://Users/fx19583/robot/part1_group13/inc/CortexM.h"
+#include "C://Users/fx19583/robot/part1_group13/inc/motor.h"
 
 
 // Color    LED(s) Port2
@@ -107,31 +107,31 @@ void PORT4_IRQHandler(void){
 
       switch(status){
 
-        case 0x6D: // Bump switch 1
+        case 0x02: // Bump switch 1
 		
             // Change the coloured LED into green (backward)
             Port2_Output(GREEN);      // White is the colour to represent moving forward
 
             // Move backward at 500 duty for 200ms
-            Motor_BackwardSimple(500, 200);
+            Motor_BackwardSimple(500, 200000);
 
 			// turn off the coloured LED
             Port2_Output(0);   // turn off the coloured LED
 
             // Stop for 1000ms
-            Motor_StopSimple(1000);    // Stop the motor on initial state
+            Motor_StopSimple(100);    // Stop the motor on initial state
 
 			// Change the coloured LED into yellow (turn left)
             Port2_Output(YELLOW);      // White is the colour to represent moving forward
 
             // Make a left turn at 500 duty for 100ms
-            Motor_LeftSimple(500, 100);
+            Motor_LeftSimple(500, 1000000);
 
 			// turn off the coloured LED
             Port2_Output(0);   // turn off the coloured LED
 
             // Stop for 1000ms
-            Motor_StopSimple(1000);    // Stop the motor on initial state
+            Motor_StopSimple(100);    // Stop the motor on initial state
 
           break;
         case 0x06: // Bump switch 2
@@ -188,7 +188,7 @@ void PORT4_IRQHandler(void){
             Motor_StopSimple(1000);    // Stop the motor on initial state
 			
           break;
-        case 0x12: // Bump switch 4
+        case 0x0C: // Bump switch 4
 		
             // Change the coloured LED into green (backward)
 			
@@ -206,7 +206,7 @@ void PORT4_IRQHandler(void){
             // Stop for 1000ms
 			
           break;
-        case 0x14: // Bump switch 5
+        case 0x0E: // Bump switch 5
 		
             // Change the coloured LED into green (backward)
 			
@@ -225,7 +225,7 @@ void PORT4_IRQHandler(void){
             // Stop for 1000ms
 			
           break;
-        case 0x16: // Bump switch 6
+        case 0x10: // Bump switch 6
 
             // Change the coloured LED into green (backward)
 			
@@ -276,29 +276,26 @@ void checkbumpswitch(uint8_t status)
 
     switch(status){
       //case 0x02: // Bump switch 1 (for interrupt vector)
-        case 0x6D: // Bump 1
-          Motor_BackwardSimple(500, 200); 	// Move backward at 500 duty for 200ms
-
+        case 0x02: // Bump 1
         break;
       //case 0x06: // Bump switch 2 (for interrupt vector)
-        case 0xAD: // Bump 2
-          Motor_BackwardSimple(500, 200);   // Move backward at 500 duty for 200ms
+        case 0x06: // Bump 2
 
         break;
       //case 0x08: // Bump switch 3 (for interrupt vector)
-        case 0xCD: // Bump 3
+        case 0x08: // Bump 3
 
         break;
       //case 0x0C: // Bump switch 4 (for interrupt vector)
-        case 0xE5: // Bump 4
+        case 0x0C: // Bump 4
 
         break;
       //case 0x0E: // Bump switch 5 (for interrupt vector)
-        case 0xE9: // Bump 5
+        case 0x0E: // Bump 5
 
         break;
       //case 0x10: // Bump switch 6 (for interrupt vector)
-        case 0xEC: // Bump 6
+        case 0x10: // Bump 6
 
         break;
       case 0xED: // neither switch pressed
@@ -352,10 +349,10 @@ int main(void){
   Switch_Init();            // Initialise switches
   SysTick_Init();           // Initialise SysTick timer
   Port1_Init();             // Initialise P1.1 and P1.4 built-in buttons
-  while(!SW2IN){            // Wait for SW2 switch
-      SysTick_Wait10ms(10); // Wait here for every 100ms
-      REDLED = !REDLED;     // The red LED is blinking waiting for command
-  }
+//  while(!SW2IN){            // Wait for SW2 switch
+//      SysTick_Wait10ms(10); // Wait here for every 100ms
+//      REDLED = !REDLED;     // The red LED is blinking waiting for command
+//  }
   REDLED = 0;               // Turn off the red LED
   BumpEdgeTrigger_Init();   // Initialise bump switches using edge interrupt
 
@@ -364,29 +361,40 @@ int main(void){
   Motor_InitSimple();       // Initialise DC Motor
   Motor_StopSimple(100);    // Stop the motor on initial state
 
-  EnableInterrupts();       // Clear the I bit
-
-  // Run forever
-  while(1){
-
-	// This section is used for Example 1 (seciton 5.8.1)
-        __no_operation();		// the code will run without operation
-
-    // This section is used for Example 2 (section 5.8.2)
-
-        status = Bump_Read_Input();
-        if (status == 0x6D || status == 0xAD || status == 0xCD || status == 0xE5 || status == 0xE9 || status == 0xEC) {
-            checkbumpswitch(status);
-        }
-
-
-	// This section is used for Example 3 (section 5.8.3)
-		// Move forward with 500 duty but can run with any number for time_ms,
-		// in this case, the robot will move infinitely because of the while loop,
-		// (although the time_ms used is 1)
-
-        Motor_ForwardSimple(500, 1);
-
-
+//  EnableInterrupts();       // Clear the I bit
+  int mode;
+  while (1){
+      if SW1IN{
+          mode=1;
+          break;
+      }
+      if SW2IN{
+          mode=2;
+          break;
+      }
   }
+  Motor_ForwardSimple(900,1000);
+//  // Run forever
+//  while(1){
+//
+//	// This section is used for Example 1 (seciton 5.8.1)
+//        __no_operation();		// the code will run without operation
+//
+//    // This section is used for Example 2 (section 5.8.2)
+//
+//        status = Bump_Read_Input();
+//        if (status == 0x6D || status == 0xAD || status == 0xCD || status == 0xE5 || status == 0xE9 || status == 0xEC) {
+//            checkbumpswitch(status);
+//        }
+//
+//
+//	// This section is used for Example 3 (section 5.8.3)
+//		// Move forward with 500 duty but can run with any number for time_ms,
+//		// in this case, the robot will move infinitely because of the while loop,
+//		// (although the time_ms used is 1)
+//
+//        Motor_ForwardSimple(500, 1);
+//
+//
+//  }
 }
