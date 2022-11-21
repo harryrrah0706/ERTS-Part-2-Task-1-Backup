@@ -72,14 +72,14 @@ void Motor_ForwardSimple(uint16_t duty, uint32_t time_ms){
     uint32_t i; // this i is used for the 'for loop' in section mtr_pwm_loop
     uint16_t L;
     L = 1000-duty; // PWM using H and L
-    P1->DIR |= ~0xC0;
-    P1->OUT |= ~0xC0;
-    P2->DIR |= ~0xC0;
-    for (i=0; i<=time_ms; i=i+1){
+    P1->DIR |= 0xC0;
+    P1->OUT &= ~0xC0;
+//    P2->DIR |= ~0xC0;
+    for (i=0; i<time_ms; i++){
       P2->OUT |= 0xC0;
-      SysTick_Wait1ms(duty);    // Stop the motor on initial state
+      SysTick_Wait1us(duty);    // Stop the motor on initial state
 	  P2->OUT &= ~0xC0; 
-	  SysTick_Wait1ms(L);    // Stop the motor on initial state
+	  SysTick_Wait1us(L);    // Stop the motor on initial state
     }
 }
 
@@ -89,13 +89,14 @@ void Motor_BackwardSimple(uint16_t duty, uint32_t time_ms){
     uint16_t L;
     L = 1000-duty; // PWM using H and L
     P1->DIR |= 0xC0;
-    P1->OUT |= 0xC0;
     P2->DIR |= 0xC0;
-    for (i=0; i<=time_ms; i=i+1){
+    P1->OUT |= 0xC0;
+//    P2->DIR |= 0xC0;
+    for (i=0; i<time_ms; i++){
       P2->OUT |= 0xC0;
-      SysTick_Wait1ms(duty);    // Stop the motor on initial state
+      SysTick_Wait1us(duty);    // Stop the motor on initial state
       P2->OUT &= ~0xC0;
-      SysTick_Wait1ms(L);    // Stop the motor on initial state
+      SysTick_Wait1us(L);    // Stop the motor on initial state
     }
 }
 
@@ -104,14 +105,15 @@ void Motor_LeftSimple(uint16_t duty, uint32_t time_ms){
     uint32_t i; // this i is used for the 'for loop' in section mtr_pwm_loop
     uint16_t L;
     L = 1000-duty; // PWM using H and L
-    P1->DIR |= ~0x40;
-    P1->OUT |= ~0x40;
-    P2->DIR |= ~0x40;
-    for (i=0; i<=time_ms; i=i+1){
-      P2->OUT |= 0x40;
-      SysTick_Wait1ms(duty);    // Stop the motor on initial state
-      P2->OUT &= ~0x40;
-      SysTick_Wait1ms(L);    // Stop the motor on initial state
+    P1->DIR |= 0xC0;
+    P1->OUT |= 0x80;
+    P1->OUT &= ~0x40;
+//    P2->DIR |= ~0x40;
+    for (i=0; i<time_ms; i++){
+      P2->OUT |= 0xC0;
+      SysTick_Wait1us(duty);    // Stop the motor on initial state
+      P2->OUT &= ~0xC0;
+      SysTick_Wait1us(L);    // Stop the motor on initial state
     }
 }
 void Motor_RightSimple(uint16_t duty, uint32_t time_ms){
@@ -119,13 +121,14 @@ void Motor_RightSimple(uint16_t duty, uint32_t time_ms){
     uint32_t i; // this i is used for the 'for loop' in section mtr_pwm_loop
     uint16_t L;
     L = 1000-duty; // PWM using H and L
-    P1->DIR |= ~0x80;
-    P1->OUT |= ~0x80;
-    P2->DIR |= ~0x80;
-    for (i=0; i<=time_ms; i=i+1){
-      P2->OUT |= 0x80;
-      SysTick_Wait1ms(duty);    // Stop the motor on initial state
-      P2->OUT &= ~0x80;
-      SysTick_Wait1ms(L);    // Stop the motor on initial state
+    P1->DIR |= 0xC0;
+    P1->OUT |= 0x40;
+    P1->OUT &= ~0x80;
+//    P2->DIR |= ~0x80;
+    for (i=0; i<time_ms; i++){
+      P2->OUT |= 0xC0;
+      SysTick_Wait1us(duty);    // Stop the motor on initial state
+      P2->OUT &= ~0xC0;
+      SysTick_Wait1us(L);    // Stop the motor on initial state
     }
 }
