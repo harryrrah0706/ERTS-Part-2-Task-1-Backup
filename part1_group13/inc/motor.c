@@ -87,7 +87,7 @@ void Motor_BackwardSimple(uint16_t duty, uint32_t time_ms){
 
     uint32_t i; // this i is used for the 'for loop' in section mtr_pwm_loop
     uint16_t L;
-    L = 1000-duty; // PWM using H and L
+    L = 10000-duty; // PWM using H and L
     P1->DIR |= 0xC0;
     P2->DIR |= 0xC0;
     P1->OUT |= 0xC0;
@@ -104,7 +104,7 @@ void Motor_LeftSimple(uint16_t duty, uint32_t time_ms){
 
     uint32_t i; // this i is used for the 'for loop' in section mtr_pwm_loop
     uint16_t L;
-    L = 1000-duty; // PWM using H and L
+    L = 10000-duty; // PWM using H and L
     P1->DIR |= 0xC0;
     P1->OUT |= 0x80;
     P1->OUT &= ~0x40;
@@ -120,7 +120,7 @@ void Motor_RightSimple(uint16_t duty, uint32_t time_ms){
 
     uint32_t i; // this i is used for the 'for loop' in section mtr_pwm_loop
     uint16_t L;
-    L = 1000-duty; // PWM using H and L
+    L = 10000-duty; // PWM using H and L
     P1->DIR |= 0xC0;
     P1->OUT |= 0x40;
     P1->OUT &= ~0x80;
