@@ -381,7 +381,7 @@ void polling(void){
     P2->OUT |= 0xC0;
     while (1){
         __no_operation();       // the code will run without operation
-        if (mode==2){}
+        if (mode==2){
             Port2_Output(WHITE);
         }
         Motor_ForwardSimple(500,1);
