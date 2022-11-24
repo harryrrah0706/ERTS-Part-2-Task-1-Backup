@@ -381,7 +381,9 @@ void polling(void){
     P2->OUT |= 0xC0;
     while (1){
         __no_operation();       // the code will run without operation
-        Port2_Output(WHITE);
+        if (mode==2){}
+            Port2_Output(WHITE);
+        }
         Motor_ForwardSimple(500,1);
         status = Bump_Read_Input();
         if (status == 0x6D || status == 0xAD || status == 0xCD || status == 0xE5 || status == 0xE9 || status == 0xEC) {
